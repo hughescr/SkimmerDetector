@@ -36,6 +36,7 @@
 		44AAA6DE1F73709600182497 /* SkimmerDetectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkimmerDetectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44AAA6E21F73709600182497 /* SkimmerDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkimmerDetectorTests.swift; sourceTree = "<group>"; };
 		44AAA6E41F73709600182497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44AAA6EE1F7374BE00182497 /* Set-Bundle-Version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "Set-Bundle-Version.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 		44AAA6CC1F73709600182497 /* SkimmerDetector */ = {
 			isa = PBXGroup;
 			children = (
+				44AAA6ED1F73747600182497 /* Build Scripts */,
 				44AAA6CD1F73709600182497 /* AppDelegate.swift */,
 				44AAA6CF1F73709600182497 /* ViewController.swift */,
 				44AAA6D11F73709600182497 /* Main.storyboard */,
@@ -96,6 +98,14 @@
 			path = SkimmerDetectorTests;
 			sourceTree = "<group>";
 		};
+		44AAA6ED1F73747600182497 /* Build Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				44AAA6EE1F7374BE00182497 /* Set-Bundle-Version.sh */,
+			);
+			path = "Build Scripts";
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,6 +116,7 @@
 				44AAA6C61F73709600182497 /* Sources */,
 				44AAA6C71F73709600182497 /* Frameworks */,
 				44AAA6C81F73709600182497 /* Resources */,
+				44AAA6F21F73BE0200182497 /* Inject Version */,
 			);
 			buildRules = (
 			);
@@ -147,6 +158,11 @@
 					44AAA6C91F73709600182497 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					44AAA6DD1F73709600182497 = {
 						CreatedOnToolsVersion = 9.0;
@@ -193,6 +209,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		44AAA6F21F73BE0200182497 /* Inject Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Inject Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source \"${PROJECT_DIR}/Build Scripts/Set-Bundle-Version.sh\"\n# Force a re-sign because XCode *says* it will but it lies\n/usr/bin/codesign --preserve-metadata=identifier,entitlements,requirements --force --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" \"${CODESIGNING_FOLDER_PATH}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		44AAA6C61F73709600182497 /* Sources */ = {
@@ -356,6 +390,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GVYZ6YPF25;
 				INFOPLIST_FILE = SkimmerDetector/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rungie.SkimmerDetector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -371,6 +406,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GVYZ6YPF25;
 				INFOPLIST_FILE = SkimmerDetector/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rungie.SkimmerDetector;
 				PRODUCT_NAME = "$(TARGET_NAME)";

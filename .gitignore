@@ -1,0 +1,5 @@
+*.xcuserstate
+project.xcworkspace/
+xcuserdata
+\.DS_Store
+Cognoa/compile_commands.json
